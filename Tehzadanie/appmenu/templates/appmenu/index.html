@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <link rel="stylesheet" href="{% static 'appmenu/css/style.css' %}">
+</head>
+<body>
+    <h1>MENU</h1>
+    {% load mptt_tags %}
+    <ul id="myUL">
+      {% recursetree category %}
+      <li><span class="caret">{{ node.title }}</span>
+          {% if not node.is_leaf_node %}
+          <ul class="nested">
+              <li><a href="#">{{ children }}</a></li>
+          </ul>
+          {% endif %}
+      </li>
+      {% endrecursetree %}
+    </ul>
+
+    <script src="{% static 'appmenu/js/myscript.js' %}"></script>
+</body>
+</html>
